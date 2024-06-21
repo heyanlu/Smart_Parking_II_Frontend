@@ -1,0 +1,23 @@
+nav {
+  position: relative;  
+
+  background-color: coral;
+  height: 4rem;
+}
+
+.submenu {
+    list-style: none;
+    display: none;
+
+    position: absolute;
+
+    background-color: skyblue;
+    padding: 0;
+    
+    /* top: 50%; */
+}
+
+.submenu.open {
+    display: initial;
+
+}

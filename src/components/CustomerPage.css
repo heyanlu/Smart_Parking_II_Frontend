@@ -1,0 +1,34 @@
+.customer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start; 
+
+    height: 100vh;
+}
+
+
+.custom-textfield {
+    margin: 8rem;
+    width: 25ch;
+
+    margin-bottom: 5rem;
+}
+
+
+.custom-stack {
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 1rem;
+}
+
+
+
+@media (max-width: 600px) {
+    .custom-stack {
+        flex-direction: column;
+        align-items: center;
+    }
+}
