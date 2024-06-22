@@ -5,6 +5,7 @@ export const initialState = {
     licensePlate: '',
     memberType: '',
     parkVehicleMessage: '',
+    occupiedPercentage: 0.0,
     vehicles: [],
     members: [],
 };
@@ -50,13 +51,19 @@ export function reducer(state, action) {
         return {
             ...state,
             vehicles: action.payload.vehicles, 
-            deleteMemberMessage: action.payload.message,
+            getAllVehiclesMessage: action.payload.message,
         };
     case ACTIONS.GET_ALL_MEMBERS:
         return {
             ...state,
             members: action.payload.members,
-            deleteMemberMessage: action.payload.message,
+            getAllMembersMessage: action.payload.message,
+        };
+    case ACTIONS.GET_OCCUPIED_PERCENTAGE:
+        return {
+            ...state,
+            occupiedPercentage: action.payload.members,
+            occupiedPercentageMessage: action.payload.message,
         };
     default:
       return state;

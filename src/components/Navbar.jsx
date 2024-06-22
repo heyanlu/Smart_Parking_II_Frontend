@@ -4,54 +4,97 @@ import { useNavigate } from "react-router-dom";
 import { PAGES } from "../constants";
 
 import Button from "@mui/material/Button";
-import { AppBar, Menu, MenuItem, Toolbar } from "@mui/material";
-import "./Navbar.css";
+import {
+  AppBar,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Box,
+  IconButton,
+  Typography,
+  Switch,
+} from "@mui/material";
 
-const pages = [PAGES.HOME, PAGES.CUSTOMER, PAGES.ADMIN];
+import MenuIcon from "@mui/icons-material/Menu";
+import LocalParkingIcon from "@mui/icons-material/LocalParking";
+
+import {
+  StyledIconButton,
+  StyledTypography,
+  StyledBox,
+  StyledSamllScreenBox,
+  StyledSamllScreenMenu,
+  StyledSamllScreenParkingIcon,
+} from "./NavbarStyles";
+
+const pages = Object.keys(PAGES); // Convert object to array
 
 function Navbar() {
-  // navigate
   const navigate = useNavigate();
 
-  // Menu control
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  //Menu control
+  const [anchorNav, setAnchorNav] = useState(null);
+
+  const openMenu = (event) => {
+    setAnchorNav(event.currentTarget);
   };
-  const handleClose = (page) => {
-    setAnchorEl(null);
+
+  const closeMenu = (page) => {
+    setAnchorNav(null);
     navigate(`/${page}`);
   };
 
   return (
-    <AppBar>
+    <AppBar position="sticky">
       <Toolbar>
-        <Button
-          id="basic-button"
-          aria-controls={open ? "basic-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
+        <StyledIconButton
+          size="large"
+          edge="start"
           color="inherit"
+          aria-label="logo"
         >
-          Dashboard
-        </Button>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-        >
+          <LocalParkingIcon />
+        </StyledIconButton>
+        <StyledTypography variant="h6" component="div">
+          Smart Parking
+        </StyledTypography>
+        <StyledBox>
           {pages.map((page) => (
-            <MenuItem key={page} onClick={() => handleClose(page)}>
+            <Button color="inherit" key={page} onClick={() => closeMenu(page)}>
               {page}
-            </MenuItem>
+            </Button>
           ))}
-        </Menu>
+          <Switch />
+        </StyledBox>
+        {/* responsive for smaller screen */}
+        <StyledSamllScreenBox>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            onClick={openMenu}
+          >
+            <MenuIcon />
+          </IconButton>
+          <StyledSamllScreenMenu
+            open={Boolean(anchorNav)}
+            onClose={closeMenu}
+            anchorEl={anchorNav}
+          >
+            {pages.map((page) => (
+              <MenuItem key={page} onClick={() => closeMenu(page)}>
+                {page}
+              </MenuItem>
+            ))}
+            <Switch/>
+          </StyledSamllScreenMenu>
+        </StyledSamllScreenBox>
+        <StyledSamllScreenParkingIcon
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="logo"
+        />
       </Toolbar>
     </AppBar>
   );

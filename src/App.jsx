@@ -1,9 +1,11 @@
 import { useState, useReducer } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Updated import
+import { ThemeProvider } from '@mui/material/styles';
 
 import { initialState, reducer } from "./reducer";
 import { PAGES } from "./constants";
 import { ACTIONS } from "./constants";
+import theme from "./theme";
 
 import HomePage from "./components/HomePage";
 import AdminPage from "./components/AdminPage";
@@ -21,6 +23,7 @@ import {
   fetchDeleteMember,
   fetchAllMembers,
   fetchAllVehicles,
+  fetchOccupiedPercentage,
 } from "./services";
 
 function App() {
@@ -34,6 +37,9 @@ function App() {
 
   const [allVehiclesMessage, setAllVehiclesMessage] = useState("");
   const [allMembersMessage, setAllMembersMessage] = useState("");
+  const [occupiedPercentageMessage, setOccupiedPercentageMessage] = useState("");
+
+  const [occupancy, setOccupancy] = useState(0);
 
   function onParkVehicle(licensePlate) {
     fetchParkVehicle(licensePlate)
@@ -147,8 +153,20 @@ function App() {
       });
   }
 
+
+  function onGetOccupancy() {
+    fetchOccupiedPercentage()
+      .then((data) => {
+        console.log("data: ", data);
+        setOccupancy(data);
+      })
+      .catch((err) => {
+        setAllMembersMessage("Error fetching occupied percentage");
+      });
+  }
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Router>
         <header>
           <Navbar />
@@ -163,10 +181,12 @@ function App() {
                   onParkVehicle={onParkVehicle}
                   onPayVehicle={onPayVehicle}
                   onLeaveVehicle={onLeaveVehicle}
+                  occupancy={occupancy}
+                  onGetOccupancy={onGetOccupancy}
                   parkedMessage={parkedMessage}
                   payMessage={payMessage}
                   leaveMessage={leaveMessage}
-                />
+                  occupiedPercentageMessage={occupiedPercentageMessage}                 />
               }
             />
             <Route
@@ -188,7 +208,7 @@ function App() {
           </Routes>
         </main>
       </Router>
-    </>
+    </ThemeProvider>
   );
 }
 

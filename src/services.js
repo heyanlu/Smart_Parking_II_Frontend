@@ -105,11 +105,20 @@ export function fetchAllVehicles() {
       });
   }
   
-  export function fetchAllMembers() {
+export function fetchAllMembers() {
     return fetch(`${BACKEND_URL}/all-member`)
-      .then(response => response.json())
-      .catch(error => {
+        .then(response => response.json())
+        .catch(error => {
         console.error('Error fetching members:', error);
         throw error;
-      });
-  }
+        });
+}
+
+export function fetchOccupiedPercentage() {
+    return fetch(`${BACKEND_URL}/occupied-percentage`)
+        .then(response => response.json())
+        .catch(error => {
+        console.error('Error fetching occupied percentage:', error);
+        throw error;
+        });
+}
