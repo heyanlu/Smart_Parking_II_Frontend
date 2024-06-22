@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Icon, IconButton, Typography, Box, Menu } from '@mui/material';
+import { IconButton, Typography, Box, Menu } from '@mui/material';
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 
 export const StyledIconButton = styled(IconButton)(({theme})=> ({

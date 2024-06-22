@@ -6,7 +6,16 @@ export const ACTIONS = {
     DELETE_MEMBER: "deleteMember",
     GET_ALL_VEHICLES:"getAllVehicles", 
     GET_ALL_MEMBERS:"fetchAllMembers",
-    GET_OCCUPIED_PERCENTAGE:"getOccupiedPercentage",
+    GET_OCCUPANCY:"getOccupancy",
+};
+
+export const initialMessages = {
+    parkMessage: "",
+    payMessage: "",
+    leaveMessage: "",
+    addMemberMessage: "",
+    deleteMemberMessage: "",
+    occupancyMessage: "",
 };
 
 export const PAGES = {

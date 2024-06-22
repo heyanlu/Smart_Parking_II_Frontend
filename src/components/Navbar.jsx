@@ -3,18 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 import { PAGES } from "../constants";
 
-import Button from "@mui/material/Button";
 import {
   AppBar,
-  Menu,
   MenuItem,
   Toolbar,
-  Box,
   IconButton,
-  Typography,
   Switch,
+  Button
 } from "@mui/material";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 
@@ -27,9 +23,9 @@ import {
   StyledSamllScreenParkingIcon,
 } from "./NavbarStyles";
 
-const pages = Object.keys(PAGES); // Convert object to array
+const pages = Object.keys(PAGES);
 
-function Navbar() {
+function Navbar({ setMode, mode }) {
   const navigate = useNavigate();
 
   //Menu control
@@ -64,7 +60,7 @@ function Navbar() {
               {page}
             </Button>
           ))}
-          <Switch />
+          <Switch onChange={(e) => setMode(mode === "light" ? "dark" : "light")} />
         </StyledBox>
         {/* responsive for smaller screen */}
         <StyledSamllScreenBox>
@@ -86,7 +82,7 @@ function Navbar() {
                 {page}
               </MenuItem>
             ))}
-            <Switch/>
+            <Switch />
           </StyledSamllScreenMenu>
         </StyledSamllScreenBox>
         <StyledSamllScreenParkingIcon

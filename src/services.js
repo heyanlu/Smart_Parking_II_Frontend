@@ -6,7 +6,7 @@ function chainPromise(promise) {
             return Promise.reject({ error: "network-error" });
         })
         .then((response) => {
-            console.log("chainPromise - response status:", response.status);
+            // console.log("chainPromise - response status:", response.status);
             if (!response.ok) {
                 return response.json().then((err) => Promise.reject(err));
             }
@@ -15,15 +15,7 @@ function chainPromise(promise) {
 }
 
 export function fetchParkVehicle(licensePlate) {
-    // const vehicle = {
-    //     licensePlate: licensePlate.toUpperCase(),
-    //     parkingPosition: null,  
-    //     arrivalTime: null,      
-    //     paymentTime: null,      
-    //     leaveTime: null        
-    // };
-
-
+    licensePlate = licensePlate.toUpperCase();
     const fetched = fetch(`${BACKEND_URL}/park`, {
         method: "POST", 
         headers: {

@@ -1,13 +1,12 @@
-import { ACTIONS } from './constants';
+import { initialMessages, ACTIONS } from './constants';
 
 
 export const initialState = {
-    licensePlate: '',
-    memberType: '',
-    parkVehicleMessage: '',
-    occupiedPercentage: 0.0,
+    status: "",
+    occupancy: 0.0,
     vehicles: [],
     members: [],
+    messages: { ...initialMessages }
 };
 
 
@@ -16,54 +15,75 @@ export function reducer(state, action) {
     case ACTIONS.PARK_VEHICLE:
       return {
         ...state,
-        licensePlate: action.payload.message,
-        parkVehicleMessage: action.payload.message,
+        status: action.payload.status,
+        messages: {
+            ...state.messages,
+            parkMessage: action.payload.message
+        }
       };
     case ACTIONS.PROCESS_TO_PAY:
         return {
             ...state,
-            licensePlate: action.payload.message,
-            payVehicleMessage: action.payload.message,
+            status: action.payload.status,
+            messages: {
+                ...state.messages,
+                payMessage: action.payload.message
+            }
         };
-    
     case ACTIONS.PROCESS_TO_LEAVE:
         return {
             ...state,
-            licensePlate: action.payload.message,
-            leaveVehicleMessage: action.payload.message,
+            status: action.payload.status,
+            messages: {
+                ...state.messages,
+                leaveMessage: action.payload.message
+            }
         };
     case ACTIONS.ADD_MEMBER:
         return {
             ...state,
-            licensePlate: action.payload.message,
-            memberType: action.payload.message,
-            addMemberMessage: action.payload.message,
+            status: action.payload.status,
+            messages: {
+                ...state.messages,
+                addMemberMessage: action.payload.message
+            }
         };
 
     case ACTIONS.DELETE_MEMBER:
         return {
             ...state,
-            licensePlate: action.payload.message,
-            memberType: '',
-            deleteMemberMessage: action.payload.message,
+            status: action.payload.status,
+            messages: {
+                ...state.messages,
+                deleteMemberMessage: action.payload.message
+            }
         };
     case ACTIONS.GET_ALL_VEHICLES:
         return {
             ...state,
             vehicles: action.payload.vehicles, 
-            getAllVehiclesMessage: action.payload.message,
+            messages: {
+                ...state.messages,
+                allVehiclesMessage: action.payload.message
+            }
         };
     case ACTIONS.GET_ALL_MEMBERS:
         return {
             ...state,
             members: action.payload.members,
-            getAllMembersMessage: action.payload.message,
+            messages: {
+                ...state.messages,
+                allMembersMessage: action.payload.message
+            }
         };
     case ACTIONS.GET_OCCUPIED_PERCENTAGE:
         return {
             ...state,
-            occupiedPercentage: action.payload.members,
-            occupiedPercentageMessage: action.payload.message,
+            occupancy: action.payload.members,
+            messages: {
+                ...state.messages,
+                occupancyMessage: action.payload.message
+            }
         };
     default:
       return state;
