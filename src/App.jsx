@@ -135,9 +135,10 @@ function App() {
           </header>
           <main>
             <Routes>
-              <Route path={`/${PAGES.HOME}`} element={<HomePage />} />
+              <Route path="/" element={<HomePage />} />
+              <Route path={PAGES.HOME} element={<HomePage/>} />
               <Route
-                path={`/${PAGES.CUSTOMER}`}
+                path={PAGES.CUSTOMER}
                 element={
                   <CustomerPage
                     onParkVehicle={onParkVehicle}
@@ -152,7 +153,7 @@ function App() {
                 }
               />
               <Route
-                path={`/${PAGES.ADMIN}`}
+                path={PAGES.ADMIN}
                 element={
                   <AdminPage
                     onAddMember={onAddMember}
