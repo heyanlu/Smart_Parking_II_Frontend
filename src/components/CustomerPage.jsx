@@ -114,7 +114,7 @@ function CustomerPage({
         {/* parking lot information */}
         <Typography variant="h6">Parking Lot Information</Typography>
         <div className="percentage-bar-container">
-          <Typography>Available percentage: {occupancy.toFixed(2)}%</Typography>
+          <Typography>Occupied percentage: {occupancy.toFixed(2)}%</Typography>
           <div className="percentage-bar">
             <div
               className="percentage-bar-fill"
